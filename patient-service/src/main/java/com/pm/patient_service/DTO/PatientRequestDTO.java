@@ -1,37 +1,27 @@
-package com.pm.patient_service.Model;
+package com.pm.patient_service.DTO;
 
-
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import java.time.LocalDate;
-import java.util.UUID;
-
-@Entity
-public class Patient {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
-    @NotNull
+public class PatientRequestDTO {
+    @NotBlank (message = "Name is required")
+    @Size(max = 100, message = "Name must be less than 100 characters")
     private String name;
 
-    @NotNull
-    @Email
-    @Column(unique = true)
+    @NotBlank (message = "Address is required")
+    @Email (message = "Invalid email address")
     private String email;
 
-    @NotNull
+    @NotBlank (message = "Address is required")
     private String address;
 
-    @NotNull
-    private LocalDate dateOfBirth;
+    @NotBlank (message = "Date of birth is required")
+    private String dateOfBirth;
 
-    @NotNull
-    private LocalDate registeredDate;
+    @NotNull (message = "Registered date is required")
+    private String registeredDate;
 
     public String getName() {
         return name;
@@ -46,6 +36,7 @@ public class Patient {
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
@@ -57,29 +48,20 @@ public class Patient {
         this.address = address;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public LocalDate getRegisteredDate() {
+    public String getRegisteredDate() {
+
         return registeredDate;
     }
 
-    public void setRegisteredDate(LocalDate registeredDate) {
+    public void setRegisteredDate(String registeredDate) {
         this.registeredDate = registeredDate;
     }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-
 }
